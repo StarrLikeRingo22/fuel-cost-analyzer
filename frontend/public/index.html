@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Cost Analyzer</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+
+  <div class="hero bg-gray-100 text-white py-6 px-4 text-center mb-8">
+    <h1 class="text-4xl font-bold mb-10 btn btn-primary">Fuel Cost Analyzer</h1>
+  </div>
+
+  <div class="content mx-auto max-w-3xl px-4">
+    <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+      <form action="/fuel/calculate" method="POST">
+        
+        <div class="mb-4">
+          <label for="consumption" class="block text-gray-700 text-sm font-bold mb-2">Fuel Consumption (liters per 100 km):</label>
+          <input type="number" id="consumption" name="consumption" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="distance" class="block text-gray-700 text-sm font-bold mb-2">Distance (km):</label>
+          <input type="number" id="distance" name="distance" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="fuelType" class="block text-gray-700 text-sm font-bold mb-2">Fuel Type:</label>
+          <input type="text" id="fuelType" name="fuelType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="income" class="block text-gray-700 text-sm font-bold mb-2">Income per Kilometer:</label>
+          <input type="number" id="income" name="income" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+
+        <div class="mt-8 flex justify-between">
+          <button type="submit" class="btn btn-primary rounded">Calculate</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+
+  <script>
+    document.getElementById('fuelForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const consumption = document.getElementById('consumption').value;
+      const distance = document.getElementById('distance').value;
+      const fuelType = document.getElementById('fuelType').value;
+      const incomePerKm = document.getElementById('incomePerKm').value;
+
+      const response = await fetch('/calculate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ consumption, distance, fuelType, incomePerKm }),
+      });
+
+      const result = await response.json();
+      document.getElementById('result').innerText = `
+        Fuel Consumption: ${result.fuelConsumed} liters
+        Fuel Cost: $${result.fuelCost}
+        Income from the trip: $${result.income}
+        Margin: $${result.margin}
+      `;
+    });
+  </script>
+</body>
+</html>
