@@ -7,19 +7,18 @@ const port = 3000
 
 
 app.set('views', path.join(__dirname, 'views'))
-app.use(express.static(path.join(__dirname, 'views')))
-app.use(express.static(path.join(__dirname, "public")))
 
+app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/views'))
 
 app.listen(port, () => {
   console.log(`Server listening on: ${port}`)
 })
 
 
-app.get("/", (req, res) => {
-  res.render("index")
-})
-
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'home.html'));
+  })
 
 const rl = readline.createInterface({
   input: process.stdin,

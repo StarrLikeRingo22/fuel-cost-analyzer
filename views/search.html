@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Cost Analyzer</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+
+  
+  <body>
+  <div class="container mx-auto p-8">
+    <div class="card w-full max-w-lg mx-auto shadow-lg bg-base-200">
+        <div class="card-body">
+            <h2 class="card-title text-2xl font-bold">Fuel Cost Analyzer</h2>
+            <form id="fuelForm" class="space-y-4">
+                <div class="mb-4">
+                    <label class="label">
+                        <span class="label-text">Car Type</span>
+                    </label>
+                    <input id="carType" type="text" placeholder="Enter car type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                </div>
+  
+                <div class="mb-4">
+                    <label class="label">
+                        <span class="label-text">Fuel Consumption (L/100km)</span>
+                    </label>
+                    <input id="fuelConsumption" type="number" placeholder="Enter fuel consumption" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                </div>
+  
+                <div class="mb-4">
+                    <label class="label">
+                        <span class="label-text">Trip Distance (km)</span>
+                    </label>
+                    <input id="tripDistance" type="number" placeholder="Enter trip distance" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                </div>
+  
+                <div class="mb-4">
+                    <label class="label">
+                        <span class="label-text">Expected Income ($)</span>
+                    </label>
+                    <input id="income" type="number" placeholder="Enter expected income" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                </div>
+  
+                <button type="submit" class="btn btn-primary rounded">Analyze</button>
+            </form>
+        </div>
+    </div>
+  
+    <div id="result" class="mt-8 hidden">
+        <h3 class="text-xl font-bold">Results</h3>
+        <p id="fuelCost">Fuel Cost: $0.00</p>
+        <p id="profitMargin">Profit Margin: $0.00</p>
+        <p id="profitability"></p>
+    </div>
+  </div>
+  </body>
+  </html>
